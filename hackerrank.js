@@ -84,5 +84,44 @@ browserkapromise.then(
     function()
     {
         console.log("login done");
+        let waitkapromise=page.waitForSelector('[data-automation="algorithms"]');
+        return waitkapromise;
+    }
+).then(
+    function()
+    {
+        let clickkapromimse=page.click('[data-automation="algorithms"]');
+        return clickkapromimse;
+    }
+).then(
+    function()
+    {
+        return page.waitForSelector(".filter-group");
+    }
+).then(
+    function()
+    {
+        let domClickPromse=page.evaluate(
+            function()
+            {
+                let allDivs = document.querySelectorAll(".filter-group");
+                let div = allDivs[3];
+                let clickSelector = div.querySelector(".ui-checklist-list-item input");
+                clickSelector.click();
+                return;
+            }
+        );
+        return domClickPromse;
+    }
+).then(
+    function()
+    {
+        console.log("warmup Selected");
+        return page.waitForSelector('.ui-btn.ui-btn-normal.primary-cta.ui-btn-line-primary.ui-btn-styled');
+    }
+).then(
+    function()
+    {
+        console.log("   ");
     }
 )
