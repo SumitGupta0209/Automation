@@ -1,6 +1,6 @@
 const puppeteer=require("puppeteer");
 
-let browserkapromise=puppeteer.launch({headless:false});
+let browserkapromise=puppeteer.launch({headless:false,defaultViewport:null,args:['--start-fullscreen']});
 
 let page;
 const mail="mateyiv148@hhmel.com";
@@ -122,6 +122,6 @@ browserkapromise.then(
 ).then(
     function()
     {
-        console.log("   ");
+       
     }
 )
