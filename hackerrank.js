@@ -125,12 +125,30 @@ browserkapromise.then(
     function()
     {
         console.log("warmup Selected");
-        return page.waitForSelector('.ui-btn.ui-btn-normal.primary-cta.ui-btn-line-primary.ui-btn-styled');
+        return page.waitForSelector('.challenges-list .js-track-click.challenge-list-item');
     }
 ).then(
     function()
     {
-       
+       let arrkapromise=page.evaluate(
+           function()
+           {
+               let arr=[];
+               let atags=document.querySelectorAll(".challenges-list .js-track-click.challenge-list-item");
+               for(let i=0;i<atags.length;i++)
+               {
+                   let link=atags[i].href;
+                   arr.push(link);
+               }
+               return arr;
+           }
+       )
+       return arrkapromise;
+    }
+).then(
+    function(quesarray)
+    {
+        console.log(quesarray);
     }
 )
 
@@ -146,7 +164,8 @@ function waitAndClick(selector)
             {
             let clickPromise = page.click(selector);
             return clickPromise;
-            }).then(
+            }
+            ).then(
             function()
             {
             resolve();
