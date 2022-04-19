@@ -60,14 +60,21 @@ browserPromise.then(function(browser){
 
 
 
-function waitAndClick(selector){
-    return new Promise(function(resolve,reject){
+function waitAndClick(selector)
+{
+    return new Promise(
+        function(resolve,reject)
+        {
         let waitPromise = page.waitForSelector(selector);
-        waitPromise.then(function(){
+        waitPromise.then(
+            function()
+            {
             let clickPromise = page.click(selector);
             return clickPromise;
-        }).then(function(){
+            }).then(
+            function()
+            {
             resolve();
-        });
-    })
+            });
+        })
 }

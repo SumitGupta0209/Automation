@@ -26,16 +26,20 @@ browserkapromise.then(
 ).then(
     function()
     {
-        console.log("hacker rank opened");
-        let waitkapromise=page.waitForSelector("ul.menu a");
-        return waitkapromise;
+        return waitAndClick("ul.menu a");
     }
-).then(
-    function()
-    {
-        let clickkapromise=page.click("ul.menu a");
-        return clickkapromise;
-    }
+//     function()
+//     {
+//         console.log("hacker rank opened");
+//         let waitkapromise=page.waitForSelector("ul.menu a");
+//         return waitkapromise;
+//     }
+// ).then(
+//     function()
+//     {
+//         let clickkapromise=page.click("ul.menu a");
+//         return clickkapromise;
+//     }
 ).then(
     function()
     {
@@ -83,16 +87,20 @@ browserkapromise.then(
 ).then(
     function()
     {
-        console.log("login done");
-        let waitkapromise=page.waitForSelector('[data-automation="algorithms"]');
-        return waitkapromise;
+        return waitAndClick('[data-automation="algorithms"]');
     }
-).then(
-    function()
-    {
-        let clickkapromimse=page.click('[data-automation="algorithms"]');
-        return clickkapromimse;
-    }
+//     function()
+//     {
+//         console.log("login done");
+//         let waitkapromise=page.waitForSelector('[data-automation="algorithms"]');
+//         return waitkapromise;
+//     }
+// ).then(
+//     function()
+//     {
+//         let clickkapromimse=page.click('[data-automation="algorithms"]');
+//         return clickkapromimse;
+//     }
 ).then(
     function()
     {
@@ -125,3 +133,23 @@ browserkapromise.then(
        
     }
 )
+
+
+function waitAndClick(selector)
+{
+    return new Promise(
+        function(resolve,reject)
+        {
+        let waitPromise = page.waitForSelector(selector);
+        waitPromise.then(
+            function()
+            {
+            let clickPromise = page.click(selector);
+            return clickPromise;
+            }).then(
+            function()
+            {
+            resolve();
+            });
+        })
+}
