@@ -150,6 +150,21 @@ browserkapromise.then(
     {
         console.log(quesarray);
         let questionkaPromise=questionSolver(quesarray[0],code.answers[0]);
+        for(let i=1;i<quesarray.length;i++)
+        {
+            questionkaPromise = questionkaPromise.then(
+                function()
+                {
+                let nextQuestionPromise = questionSolver(quesarray[i],code.answers[i]);
+                return nextQuestionPromise;
+                })
+        }
+        return questionkaPromise;
+    }
+).then(
+    function()
+    {
+        console.log("All the warm up questions have been submitted!!!");
     }
 )
 
@@ -236,6 +251,12 @@ function questionSolver(question,answer)
             let pressV = page.keyboard.press('V');
             return pressV;
             }).then(
+                function()
+                {
+                    let upControl=page.keyboard.up('Control');
+                    return upControl;
+                }
+            ).then(
             function()
             {
             return waitAndClick('.ui-btn.ui-btn-normal.ui-btn-primary.pull-right.hr-monaco-submit.ui-btn-styled');
@@ -243,6 +264,7 @@ function questionSolver(question,answer)
             function()
             {
             console.log("questions submitted success");
+            resolve();
             })
     })
 }
